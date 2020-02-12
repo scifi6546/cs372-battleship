@@ -3,4 +3,5 @@ Spent an hour in-class on writing user stories, giving estimates for how much ti
 
 Feb 11th, 2020
 Spent an hour and a half getting board to work with defaulted ship placement.
-Spent 
+Spent an hour on being able to manually place ships.
+Spent an hour getting ships to be shot (still not finished).
