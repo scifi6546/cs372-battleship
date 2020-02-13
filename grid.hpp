@@ -3,6 +3,8 @@
 #include <vector>
 #include <string>
 #include <ncurses.h>
+#include <memory>
+#include "vec2.hpp"
 /*
  y+
  |
@@ -56,6 +58,9 @@ class Grid{
 	        noecho();	
         }
         bool placeShip(Ship to_place);
+        void addHoverShip(Ship to_place);
+        void moveHoverShip(vec2 delta_pos);
+        void flipHoverShip();
         bool shoot(int x, int y){
             bool output = false;
             for(auto ship:_ships){
@@ -68,15 +73,12 @@ class Grid{
         ~Grid(){
             endwin();
         }
-        void draw(int x,int y){
-            for(auto ship:_ships){
-                ship.draw(x,y);
-                refresh();
-            }
-        }
+        void draw(int x,int y);
    private:
         const int _boardXSize = 10;
         const int _boardYSize = 10;
+
+        std::unique_ptr<Ship> _hoverShip;
 
         std::vector<Ship> _ships;
         

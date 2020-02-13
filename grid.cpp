@@ -121,3 +121,28 @@ bool Grid::placeShip(Ship to_place){
     _ships.push_back(to_place);
     return true;
 };
+void Grid::addHoverShip(Ship to_place){
+    _hoverShip=std::make_unique<Ship>(to_place);
+}
+void Grid::moveHoverShip(vec2 delta_pos){
+    if(_hoverShip!=nullptr){
+        int x = _hoverShip->get_x();
+        int y = _hoverShip->get_y();
+        _hoverShip->set_x(delta_pos.x+x);
+        _hoverShip->set_y(delta_pos.y+y);
+    }
+}
+void Grid::draw(int x,int y){
+    for(auto ship:_ships){
+        ship.draw(x,y);
+        refresh();
+    }
+    if(_hoverShip!=nullptr){
+        _hoverShip->draw(x,y);
+    }
+}
+void Grid::flipHoverShip(){
+    if(_hoverShip!=nullptr){
+        _hoverShip->flip_ship();
+    }
+}

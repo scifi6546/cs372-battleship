@@ -9,25 +9,31 @@ class Game{
         player2.placeShip(Ship(Up,1,1,4,"battleship"));
     }
         void placeShip(Ship to_place){
+            player1.addHoverShip(to_place);
             while(true){
                 
                 
-                
+                vec2 delta(0,0);
                 char temp_char = getch();
                 if(temp_char=='w'){
-                    to_place.set_y(to_place.get_y()+1);
+                    delta.y+=1;
+                    //to_place.set_y(to_place.get_y()+1);
                 }
                 if(temp_char=='a'){
-                    to_place.set_x(to_place.get_x()-1);
+                    delta.x-=1;
+                    //to_place.set_x(to_place.get_x()-1);
                 }
                 if(temp_char=='s'){
-                    to_place.set_y(to_place.get_y()-1);
+                    delta.y-=1;
+                    //to_place.set_y(to_place.get_y()-1);
                 }
                 if(temp_char=='d'){
-                    to_place.set_x(to_place.get_x()+1);
+                    delta.x+=1;
+                    //to_place.set_x(to_place.get_x()+1);
                 }
                 if(temp_char==' '){
-                    to_place.flip_ship();
+                    player1.flipHoverShip();
+                    //to_place.flip_ship();
                 }
                 int res = clear();
                 if(res!=OK){
@@ -35,9 +41,10 @@ class Game{
                     printf("clear broke\n");
                     break;
                 }
+                player1.moveHoverShip(delta);
                 //refresh();
                 clear();
-                to_place.draw(1,1);
+                //to_place.draw(1,1);
                 draw();
                 refresh();
                 
