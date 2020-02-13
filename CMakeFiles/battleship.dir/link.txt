@@ -1,1 +1,0 @@
-/usr/bin/g++-9  -g   CMakeFiles/battleship.dir/main.cpp.o CMakeFiles/battleship.dir/grid.cpp.o  -o battleship  -lncurses 
