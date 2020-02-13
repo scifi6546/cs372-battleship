@@ -73,7 +73,6 @@ class Grid{
                 ship.draw(x,y);
                 refresh();
             }
-            getch();
         }
    private:
         const int _boardXSize = 10;

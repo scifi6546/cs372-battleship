@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/nick/programming/cs372-battleship/grid.cpp
+grid.hpp
+/home/nick/programming/cs372-battleship/grid.hpp
+
+/home/nick/programming/cs372-battleship/grid.hpp
+vector
+-
+string
+-
+ncurses.h
+-
+

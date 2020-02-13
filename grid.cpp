@@ -8,6 +8,7 @@ Ship::Ship(Rotation rot,int x_pos,int y_pos,int length,std::string name){
 }
 void Ship::_buildHull(){
             //if up
+            _hull.clear();
             if(_rotation==Up){
                 for(int i=0;i<_length;i++){
                     ShipHull hull;
@@ -64,7 +65,7 @@ void Ship::flip_ship(){
             _rotation=Left;
             break;
         case Left:
-            _rotation=Left;
+            _rotation=Up;
             break;
     }
     _buildHull();

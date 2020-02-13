@@ -4,12 +4,15 @@
 class Game{
     public:
     Game(){
+        initscr();
         player1.placeShip(Ship(Right,1,1,4,"battleship"));
         player2.placeShip(Ship(Up,1,1,4,"battleship"));
     }
         void placeShip(Ship to_place){
             while(true){
-                clear();
+                
+                
+                
                 char temp_char = getch();
                 if(temp_char=='w'){
                     to_place.set_y(to_place.get_y()+1);
@@ -26,7 +29,16 @@ class Game{
                 if(temp_char==' '){
                     to_place.flip_ship();
                 }
+                int res = clear();
+                if(res!=OK){
+                    endwin();
+                    printf("clear broke\n");
+                    break;
+                }
+                //refresh();
+                clear();
                 to_place.draw(1,1);
+                draw();
                 refresh();
                 
             }
@@ -38,7 +50,6 @@ class Game{
     private:
         Grid player1;
         Grid player2;
-
         //State
         
 
