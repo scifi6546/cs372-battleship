@@ -123,6 +123,33 @@ battleship/fast:
 	$(MAKE) -f CMakeFiles/battleship.dir/build.make CMakeFiles/battleship.dir/build
 .PHONY : battleship/fast
 
+drawing.o: drawing.cpp.o
+
+.PHONY : drawing.o
+
+# target to build an object file
+drawing.cpp.o:
+	$(MAKE) -f CMakeFiles/battleship.dir/build.make CMakeFiles/battleship.dir/drawing.cpp.o
+.PHONY : drawing.cpp.o
+
+drawing.i: drawing.cpp.i
+
+.PHONY : drawing.i
+
+# target to preprocess a source file
+drawing.cpp.i:
+	$(MAKE) -f CMakeFiles/battleship.dir/build.make CMakeFiles/battleship.dir/drawing.cpp.i
+.PHONY : drawing.cpp.i
+
+drawing.s: drawing.cpp.s
+
+.PHONY : drawing.s
+
+# target to generate assembly for a file
+drawing.cpp.s:
+	$(MAKE) -f CMakeFiles/battleship.dir/build.make CMakeFiles/battleship.dir/drawing.cpp.s
+.PHONY : drawing.cpp.s
+
 grid.o: grid.cpp.o
 
 .PHONY : grid.o
@@ -150,32 +177,32 @@ grid.cpp.s:
 	$(MAKE) -f CMakeFiles/battleship.dir/build.make CMakeFiles/battleship.dir/grid.cpp.s
 .PHONY : grid.cpp.s
 
-main.o: main.cpp.o
+test.o: test.cpp.o
 
-.PHONY : main.o
+.PHONY : test.o
 
 # target to build an object file
-main.cpp.o:
-	$(MAKE) -f CMakeFiles/battleship.dir/build.make CMakeFiles/battleship.dir/main.cpp.o
-.PHONY : main.cpp.o
+test.cpp.o:
+	$(MAKE) -f CMakeFiles/battleship.dir/build.make CMakeFiles/battleship.dir/test.cpp.o
+.PHONY : test.cpp.o
 
-main.i: main.cpp.i
+test.i: test.cpp.i
 
-.PHONY : main.i
+.PHONY : test.i
 
 # target to preprocess a source file
-main.cpp.i:
-	$(MAKE) -f CMakeFiles/battleship.dir/build.make CMakeFiles/battleship.dir/main.cpp.i
-.PHONY : main.cpp.i
+test.cpp.i:
+	$(MAKE) -f CMakeFiles/battleship.dir/build.make CMakeFiles/battleship.dir/test.cpp.i
+.PHONY : test.cpp.i
 
-main.s: main.cpp.s
+test.s: test.cpp.s
 
-.PHONY : main.s
+.PHONY : test.s
 
 # target to generate assembly for a file
-main.cpp.s:
-	$(MAKE) -f CMakeFiles/battleship.dir/build.make CMakeFiles/battleship.dir/main.cpp.s
-.PHONY : main.cpp.s
+test.cpp.s:
+	$(MAKE) -f CMakeFiles/battleship.dir/build.make CMakeFiles/battleship.dir/test.cpp.s
+.PHONY : test.cpp.s
 
 # Help Target
 help:
@@ -186,12 +213,15 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... battleship"
 	@echo "... edit_cache"
+	@echo "... drawing.o"
+	@echo "... drawing.i"
+	@echo "... drawing.s"
 	@echo "... grid.o"
 	@echo "... grid.i"
 	@echo "... grid.s"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
+	@echo "... test.o"
+	@echo "... test.i"
+	@echo "... test.s"
 .PHONY : help
 
 

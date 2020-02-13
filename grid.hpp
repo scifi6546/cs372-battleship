@@ -51,12 +51,6 @@ class Ship{
 };
 class Grid{
    public:
-        Grid(){
-            initscr();
-            raw();				/* Line buffering disabled	*/
-	        keypad(stdscr, TRUE);		/* We get F1, F2 etc..		*/
-	        noecho();	
-        }
         bool placeShip(Ship to_place);
         void addHoverShip(Ship to_place);
         void moveHoverShip(vec2 delta_pos);
@@ -70,9 +64,6 @@ class Grid{
                 }
             }
             return output;
-        }
-        ~Grid(){
-            endwin();
         }
         void draw(int x,int y);
    private:

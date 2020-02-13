@@ -1,4 +1,5 @@
 #include "grid.hpp"
+#include "drawing.hpp"
 Ship::Ship(Rotation rot,int x_pos,int y_pos,int length,std::string name){
             _rotation = rot;
             _Xpos=x_pos;
@@ -92,9 +93,9 @@ bool Ship::shoot(int x,int y){
 void Ship::draw(int x,int y){
     for(auto h:_hull){
         if(h.shot==true){
-            mvaddch(LINES - (h.y+y),h.x+x,'*');
+            drawchar(vec2(h.x+x,LINES - (h.y+y)),'*');
         }else{
-            mvaddch(LINES - (h.y+y),h.x+x,'#');
+            drawchar(vec2(h.x+x,LINES - (h.y+y)),'*');
         }
     }
 }
@@ -130,7 +131,7 @@ bool Grid::isOnBoard(Ship& to_check){
         return false;
     }
     //checking left
-    if(to_check.getRot()==Left&& to_check.length()-to_check.get_x()<0){
+    if(to_check.getRot()==Left&& to_check.get_x()-to_check.length()<0){
         return false;
     }
     //checking forwards

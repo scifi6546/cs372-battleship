@@ -4,7 +4,6 @@
 class Game{
     public:
     Game(){
-        initscr();
         player1.placeShip(Ship(Right,1,1,4,"battleship"));
         player2.placeShip(Ship(Up,1,1,4,"battleship"));
     }
@@ -34,6 +33,9 @@ class Game{
                 if(temp_char==' '){
                     player1.flipHoverShip();
                     //to_place.flip_ship();
+                }
+                if(temp_char=='\n'){
+                    break;
                 }
                 int res = clear();
                 if(res!=OK){
