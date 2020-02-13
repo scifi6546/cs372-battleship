@@ -61,6 +61,7 @@ class Grid{
         void addHoverShip(Ship to_place);
         void moveHoverShip(vec2 delta_pos);
         void flipHoverShip();
+        bool isOnBoard(Ship& to_check);
         bool shoot(int x, int y){
             bool output = false;
             for(auto ship:_ships){

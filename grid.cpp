@@ -99,27 +99,13 @@ void Ship::draw(int x,int y){
     }
 }
 bool Grid::placeShip(Ship to_place){
-    if(to_place.get_x()>=_boardXSize || to_place.get_y()>=_boardYSize ){
-        return false;
+   
+    if(isOnBoard(to_place)){
+        _ships.push_back(to_place);
+        return true;
+    }else{
+    return false;
     }
-    //checking backwards
-    if(to_place.getRot()==Left&& to_place.get_x()-to_place.length()<0){
-        return false;
-    }
-    //checking forwards
-    if(to_place.getRot()==Right&& to_place.length()+to_place.get_x()>=_boardXSize){
-        return false;
-    }
-    //checking up
-    if(to_place.getRot()==Up&& to_place.length()+to_place.get_y()>=_boardYSize){
-        return false;
-    }
-    //checking down
-    if(to_place.getRot()==Down && to_place.length()-to_place.get_y()<0){
-        return false;
-    }
-    _ships.push_back(to_place);
-    return true;
 };
 void Grid::addHoverShip(Ship to_place){
     _hoverShip=std::make_unique<Ship>(to_place);
@@ -130,7 +116,36 @@ void Grid::moveHoverShip(vec2 delta_pos){
         int y = _hoverShip->get_y();
         _hoverShip->set_x(delta_pos.x+x);
         _hoverShip->set_y(delta_pos.y+y);
+        if(!isOnBoard(*_hoverShip)){
+            _hoverShip->set_x(x);
+            _hoverShip->set_y(y);
+        }
     }
+}
+bool Grid::isOnBoard(Ship& to_check){
+    if(to_check.get_x()>=_boardXSize || to_check.get_y()>=_boardYSize ){
+        return false;
+    }
+    if(to_check.get_x()<0 || to_check.get_y()<0){
+        return false;
+    }
+    //checking left
+    if(to_check.getRot()==Left&& to_check.length()-to_check.get_x()<0){
+        return false;
+    }
+    //checking forwards
+    if(to_check.getRot()==Right&& to_check.length()+to_check.get_x()>=_boardXSize){
+        return false;
+    }
+    //checking up
+    if(to_check.getRot()==Up&& to_check.length()+to_check.get_y()>=_boardYSize){
+        return false;
+    }
+    //checking down
+    if(to_check.getRot()==Down && to_check.get_y()-to_check.length()<0){
+        return false;
+    }
+    return true;
 }
 void Grid::draw(int x,int y){
     for(auto ship:_ships){
