@@ -14,3 +14,4 @@ TOTAL: 2 hours
 
 Feb 17th, 2020
 Spent 20 minutes finishing up placement of ships (can now lock into place and be placed by BOTH players)
+Spent 10 minutes adding a visual representation for the grid (in the form of tildes)
