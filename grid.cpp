@@ -81,7 +81,7 @@ bool Ship::shoot(int x,int y, vector<vector<bool>> & beenShot){
     bool is_shot = false;
     for(size_t i =0; i<_hull.size();i++){
 
-        beenShot[y][x] = true;
+        beenShot[x][y] = true;
         if(_hull[i].pos.x==x && _hull[i].pos.y==y && _hull[i].shot==false){
 	
             auto t_hull = _hull[i];
