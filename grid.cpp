@@ -1,5 +1,7 @@
 #include "grid.hpp"
 #include "drawing.hpp"
+#include<iostream>
+
 Ship::Ship(Rotation rot,int x_pos,int y_pos,int length,std::string name){
             _rotation = rot;
             _Xpos=x_pos;
@@ -73,9 +75,11 @@ void Ship::flip_ship(){
     }
     _buildHull();
 }
-bool Ship::shoot(int x,int y){
+bool Ship::shoot(int x,int y, Grid & board){
     bool is_shot = false;
     for(size_t i =0; i<_hull.size();i++){
+
+        board.beenShot[y][x] = true;
         if(_hull[i].pos.x==x && _hull[i].pos.y==y && _hull[i].shot==false){
 	
             auto t_hull = _hull[i];
@@ -93,6 +97,7 @@ bool Ship::shoot(int x,int y){
     if(num_shot==_length){
         sunk = true;
     }
+    
     return is_shot;
 }
 void Ship::draw(int x,int y){
@@ -185,11 +190,15 @@ bool Grid::shoot(int x, int y){
     }
     return output;
 }
-   
+
 void Grid::draw(vec2 offset){
     for(int i=0;i<_boardXSize;i++){
-        for(int j=0;j<_boardYSize;j++){
-            draw::drawchar(vec2(offset.x+i,offset.y+j),'~',OCEAN);
+        for(int j=0;j<_boardYSize;j++){  
+            //draw::drawchar(vec2(offset.x+i,offset.y+j),'~',OCEAN);
+            if(i == 5 && j == 7)
+                draw::drawchar(vec2(offset.x+i,offset.y+j),'~',OCEAN);
+            else
+                draw::drawchar(vec2(offset.x+i,offset.y+j),'O',OCEAN);
         }
     }
     for(auto ship:_ships){
