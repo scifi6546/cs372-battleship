@@ -4,6 +4,7 @@
 #include <string>
 #include <memory>
 #include "vec2.hpp"
+#include<vector>
 /*
  y+
  |
@@ -30,9 +31,9 @@ class Ship{
         int length()const{return _length;};
         Rotation getRot()const{return _rotation;};
         //shoots hull elements
-        bool shoot(int x,int y);
+        bool shoot(int x,int y, std::vector<std::vector<bool>> & beenShot);
         //draws elements with offset x and y
-        void draw(int x,int y);
+        void draw(int x,int y, std::vector<std::vector<bool>> & beenShot);
         //flips ships clockwise
         void flip_ship();
         std::vector<ShipHull> _hull;
@@ -56,8 +57,8 @@ class Grid{
         void flipHoverShip();
         bool isOnBoard(Ship& to_check);
         bool isOverlapping(const Ship &to_check);
-        bool shoot(int x, int y);
-        void draw(vec2 offset);
+        bool shoot(int x, int y, std::vector<std::vector<bool>> & beenShot);
+        void draw(vec2 offset, std::vector<std::vector<bool>> & beenShot);
         bool placeHover();
         void setCursor(vec2 pos);
    private:

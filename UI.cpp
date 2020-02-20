@@ -1,6 +1,7 @@
 #include "UI.hpp"
+using std::vector;
 
-void Game::placeShip(int playerNum, Ship to_place){
+void Game::placeShip(int playerNum, Ship to_place, vector<vector<bool>> & beenShot){
     auto player = &player1;
     if(playerNum==2){
         player = &player2; 
@@ -37,16 +38,16 @@ void Game::placeShip(int playerNum, Ship to_place){
         //refresh();
         draw::clear_screen();
         //to_place.draw(1,1);
-        draw();
+        draw(beenShot);
         draw::refresh_screen();
         
     }
 }
-void Game::draw(){
-    player1.draw(vec2(1,1));
-    player2.draw(vec2(20,1));
+void Game::draw(vector<vector<bool>> & beenShot){
+    player1.draw(vec2(1,1), beenShot);
+    player2.draw(vec2(20,1), beenShot);
 }
-void Game::shoot(int player_num){
+void Game::shoot(int player_num, vector<vector<bool>> & beenShot, bool & quit){
     auto player = &player1;
     if(player_num==2){
         player = &player2; 
@@ -71,13 +72,17 @@ void Game::shoot(int player_num){
             char_pos.x+=1;
         }
         if(temp_char==' '){
-            player->shoot(char_pos.x,char_pos.y);
+            player->shoot(char_pos.x,char_pos.y, beenShot);
             break;
         }
+        if(temp_char==27){
+            quit = true;
+            return;
+        }
         player->setCursor(char_pos);
-        draw();
+        draw(beenShot);
         draw::refresh_screen();
     }
-    player->shoot(char_pos.x,char_pos.y);
+    player->shoot(char_pos.x,char_pos.y, beenShot);
     draw::refresh_screen();
 }

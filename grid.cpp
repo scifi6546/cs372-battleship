@@ -1,6 +1,8 @@
 #include "grid.hpp"
 #include "drawing.hpp"
 #include<iostream>
+#include<vector>
+using std::vector;
 
 Ship::Ship(Rotation rot,int x_pos,int y_pos,int length,std::string name){
             _rotation = rot;
@@ -75,11 +77,11 @@ void Ship::flip_ship(){
     }
     _buildHull();
 }
-bool Ship::shoot(int x,int y, Grid & board){
+bool Ship::shoot(int x,int y, vector<vector<bool>> & beenShot){
     bool is_shot = false;
     for(size_t i =0; i<_hull.size();i++){
 
-        board.beenShot[y][x] = true;
+        beenShot[y][x] = true;
         if(_hull[i].pos.x==x && _hull[i].pos.y==y && _hull[i].shot==false){
 	
             auto t_hull = _hull[i];
@@ -100,13 +102,13 @@ bool Ship::shoot(int x,int y, Grid & board){
     
     return is_shot;
 }
-void Ship::draw(int x,int y){
+void Ship::draw(int x,int y, vector<vector<bool>> & beenShot){
     for(auto h:_hull){
-        if(h.shot==true){
-            draw::drawchar(vec2(h.pos.x+x,h.pos.y+y),'#',SHIP);
+        if(h.shot){
+            draw::drawchar(vec2(h.pos.x+x,h.pos.y+y),'*',SHIP);
                 draw::drawchar(vec2(12,12),'h',NONE);
         }else{
-            draw::drawchar(vec2(h.pos.x+x,h.pos.y+y),'*',SHIP);
+            draw::drawchar(vec2(h.pos.x+x,h.pos.y+y),'#',SHIP);
                 draw::drawchar(vec2(12,13),'n',NONE);
         }
     }
@@ -181,32 +183,31 @@ bool Grid::isOnBoard(Ship& to_check){
     }
     return true;
 }
-bool Grid::shoot(int x, int y){
+bool Grid::shoot(int x, int y, vector<vector<bool>> & beenShot){
     bool output = false;
     for(auto ship:_ships){
-        if(ship.shoot(x,y)){
+        if(ship.shoot(x,y,beenShot)){
             output = true;
         }
     }
     return output;
 }
 
-void Grid::draw(vec2 offset){
+void Grid::draw(vec2 offset, vector<vector<bool>> & beenShot){
     for(int i=0;i<_boardXSize;i++){
-        for(int j=0;j<_boardYSize;j++){  
-            //draw::drawchar(vec2(offset.x+i,offset.y+j),'~',OCEAN);
-            if(i == 5 && j == 7)
-                draw::drawchar(vec2(offset.x+i,offset.y+j),'~',OCEAN);
+        for(int j=0;j<_boardYSize;j++){
+            if(beenShot[i][j])  
+                draw::drawchar(vec2(offset.x+i,offset.y+j),'X',OCEAN);
             else
-                draw::drawchar(vec2(offset.x+i,offset.y+j),'O',OCEAN);
+                draw::drawchar(vec2(offset.x+i,offset.y+j),'~',OCEAN);
         }
     }
     for(auto ship:_ships){
-        ship.draw(offset.x,offset.y);
+        ship.draw(offset.x,offset.y, beenShot);
         draw::refresh_screen();
     }
     if(_hoverShip!=nullptr){
-        _hoverShip->draw(offset.x,offset.y);
+        _hoverShip->draw(offset.x,offset.y, beenShot);
     }
     draw::drawchar(_cursorPos+offset,'@',CURSOR);
 }
