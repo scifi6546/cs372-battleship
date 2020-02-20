@@ -1,7 +1,8 @@
 #include "drawing.hpp"
 #include <ncurses.h>
 bool ActuallyRunning=false;
-void init(bool DrawToScreen){
+
+void draw::init(bool DrawToScreen){
     if(DrawToScreen){
         ActuallyRunning=true;
         initscr();
@@ -10,15 +11,40 @@ void init(bool DrawToScreen){
 	    noecho();
     }
 }
-int drawchar(vec2 pos,char to_draw){
+int draw::drawchar(vec2 pos,char to_draw){
     if(ActuallyRunning){
-        mvaddch(pos.y,pos.x,to_draw);
+        mvaddch(draw::getRows()-pos.y,pos.x,to_draw);
     }
 }
-void quit(){
+void draw::quit(){
     if(ActuallyRunning){
          endwin();
          ActuallyRunning=false;
     }
-    
+}
+int draw::getCols(){
+    if(ActuallyRunning){
+        return getmaxx(stdscr);
+    }
+}
+int draw::getRows(){
+    if(ActuallyRunning){
+        return getmaxy(stdscr);
+    }
+}
+void draw::refresh_screen(){
+    if(ActuallyRunning){
+        refresh();
+    }
+}
+void draw::clear_screen(){
+    if(ActuallyRunning){
+        clear();
+    }
+}
+char draw::getchar(){
+    if(ActuallyRunning){
+        return getch();
+    }
+    return 0;
 }

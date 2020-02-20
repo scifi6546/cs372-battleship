@@ -13,8 +13,8 @@ void Ship::_buildHull(){
             if(_rotation==Up){
                 for(int i=0;i<_length;i++){
                     ShipHull hull;
-                    hull.x = _Xpos;
-                    hull.y = _Ypos+i;
+                    hull.pos.x = _Xpos;
+                    hull.pos.y = _Ypos+i;
                     _hull.push_back(hull);
                 }
             }
@@ -22,8 +22,8 @@ void Ship::_buildHull(){
              if(_rotation==Down){
                 for(int i=0;i<_length;i++){
                     ShipHull hull;
-                    hull.x = _Xpos;
-                    hull.y = _Ypos-i;
+                    hull.pos.x = _Xpos;
+                    hull.pos.y = _Ypos-i;
                     _hull.push_back(hull);
                 }
             }
@@ -31,8 +31,8 @@ void Ship::_buildHull(){
             if(_rotation==Left){
                 for(int i=0;i<_length;i++){
                     ShipHull hull;
-                    hull.x = _Xpos-i;
-                    hull.y = _Ypos;
+                    hull.pos.x = _Xpos-i;
+                    hull.pos.y = _Ypos;
                     _hull.push_back(hull);
                 }
             }
@@ -40,8 +40,8 @@ void Ship::_buildHull(){
             if(_rotation==Right){
                 for(int i=0;i<_length;i++){
                     ShipHull hull;
-                    hull.x = _Xpos+i;
-                    hull.y = _Ypos;
+                    hull.pos.x = _Xpos+i;
+                    hull.pos.y = _Ypos;
                     _hull.push_back(hull);
                 }
             }
@@ -74,7 +74,7 @@ void Ship::flip_ship(){
 bool Ship::shoot(int x,int y){
     bool is_shot = false;
     for(size_t i =0; i<_hull.size();i++){
-        if(_hull[i].x==x && _hull[i].y==y && _hull[i].shot==false){
+        if(_hull[i].pos.x==x && _hull[i].pos.y==y && _hull[i].shot==false){
             _hull[i].shot=true;
             is_shot = true;
         }
@@ -93,15 +93,15 @@ bool Ship::shoot(int x,int y){
 void Ship::draw(int x,int y){
     for(auto h:_hull){
         if(h.shot==true){
-            drawchar(vec2(h.x+x,LINES - (h.y+y)),'*');
+            draw::drawchar(vec2(h.pos.x+x,h.pos.y+y),'*');
         }else{
-            drawchar(vec2(h.x+x,LINES - (h.y+y)),'*');
+            draw::drawchar(vec2(h.pos.x+x,h.pos.y+y),'*');
         }
     }
 }
 bool Grid::placeShip(Ship to_place){
    
-    if(isOnBoard(to_place)){
+    if(isOnBoard(to_place)&& !isOverlapping(to_place)){
         _ships.push_back(to_place);
         return true;
     }else{
@@ -110,6 +110,15 @@ bool Grid::placeShip(Ship to_place){
 };
 void Grid::addHoverShip(Ship to_place){
     _hoverShip=std::make_unique<Ship>(to_place);
+}
+bool Grid::placeHover(){
+    if(_hoverShip!=nullptr){
+        bool status = placeShip(*_hoverShip);
+        _hoverShip=nullptr;
+        return status;
+    }
+    return false;
+    
 }
 void Grid::moveHoverShip(vec2 delta_pos){
     if(_hoverShip!=nullptr){
@@ -122,6 +131,18 @@ void Grid::moveHoverShip(vec2 delta_pos){
             _hoverShip->set_y(y);
         }
     }
+}
+bool Grid::isOverlapping(const Ship &to_check){
+    for(auto ship: _ships){
+        for(auto _h:ship._hull){
+            for(auto _h2:to_check._hull){
+                if(_h.pos==_h2.pos){
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
 }
 bool Grid::isOnBoard(Ship& to_check){
     if(to_check.get_x()>=_boardXSize || to_check.get_y()>=_boardYSize ){
@@ -148,14 +169,23 @@ bool Grid::isOnBoard(Ship& to_check){
     }
     return true;
 }
-void Grid::draw(int x,int y){
+void Grid::draw(vec2 offset){
+    for(int i=0;i<_boardXSize;i++){
+        for(int j=0;j<_boardYSize;j++){
+            draw::drawchar(vec2(offset.x+i,offset.y+j),'~');
+        }
+    }
     for(auto ship:_ships){
-        ship.draw(x,y);
-        refresh();
+        ship.draw(offset.x,offset.y);
+        draw::refresh_screen();
     }
     if(_hoverShip!=nullptr){
-        _hoverShip->draw(x,y);
+        _hoverShip->draw(offset.x,offset.y);
     }
+    draw::drawchar(_cursorPos,'@');
+}
+void Grid::setCursor(vec2 pos){
+    _cursorPos=pos;
 }
 void Grid::flipHoverShip(){
     if(_hoverShip!=nullptr){

@@ -2,7 +2,6 @@
 #define GRID
 #include <vector>
 #include <string>
-#include <ncurses.h>
 #include <memory>
 #include "vec2.hpp"
 /*
@@ -15,8 +14,7 @@
 enum Rotation{Right,Left,Up,Down,NUM_ROTATIONS};
 struct ShipHull{
     bool shot = false;
-    int x;
-    int y;
+    vec2 pos=vec2(0,0);
 
 };
 class Ship{
@@ -37,6 +35,7 @@ class Ship{
         void draw(int x,int y);
         //flips ships clockwise
         void flip_ship();
+        std::vector<ShipHull> _hull;
         
     private:
         //rebuild hull
@@ -46,7 +45,7 @@ class Ship{
         int _Ypos;
         int _length;
         bool sunk;
-        std::vector<ShipHull> _hull;
+        
 
 };
 class Grid{
@@ -56,6 +55,7 @@ class Grid{
         void moveHoverShip(vec2 delta_pos);
         void flipHoverShip();
         bool isOnBoard(Ship& to_check);
+        bool isOverlapping(const Ship &to_check);
         bool shoot(int x, int y){
             bool output = false;
             for(auto ship:_ships){
@@ -65,11 +65,14 @@ class Grid{
             }
             return output;
         }
-        void draw(int x,int y);
+        void draw(vec2 offset);
+        bool placeHover();
+        void setCursor(vec2 pos);
    private:
         const int _boardXSize = 10;
         const int _boardYSize = 10;
-
+        vec2 _cursorPos=vec2(0,0);
+        
         std::unique_ptr<Ship> _hoverShip;
 
         std::vector<Ship> _ships;
