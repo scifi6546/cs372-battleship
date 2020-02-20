@@ -7,31 +7,44 @@ Spent an hour and a half getting board to work with defaulted ship placement.
 Spent an hour on being able to manually place ships.
 Spent an hour adding the ability to shoot (still not finished).
 TOTAL: 3.5 hours (Pair Programming)
+Thoughts: 
+We originally predicted it would take an hour to create the board, but it took us 1.5 hours.
+We also said it would take 2 hours to get each player able to place their ships, and we worked
+on it for an hour but didn't manage to finish it. In order to take a break from it but still make
+some progress, we moved on to starting the code for shooting your opponent, which we predicted would
+take 1 hours to implement. While we didn't complete being able to manually place ships, I'd say we
+are about halfway done with it and we made good progress toward shooting the opponent.
+Difficulty Points / Hour: About 0.8
 
 Feb 13th, 2020
 Pair Programming:
 Spent an hour and a half fixing manual placement of ships (screen clears with each space moved, can't move ship off the board).
-Spent a half-hour cleaning up code and making unit tests and the player grids display together correctly
+Spent a half-hour cleaning up code and making unit tests and the player grids display together correctly.
 TOTAL: 2 hours (Pair Programming)
+Thoughts: 
 
 Feb 17th, 2020
 Pair Programming:
-Spent 20 minutes finishing up placement of ships (can now lock into place and be placed by BOTH players)
-Spent 10 minutes adding a visual representation for the grid (in the form of tildes)
-Spent a half-hour working on adding ability to shoot
+Spent 20 minutes finishing up placement of ships (can now lock into place and be placed by BOTH players).
+Spent 10 minutes adding a visual representation for the grid (in the form of tildes).
+Spent a half-hour working on adding ability to shoot.
 TOTAL: 1 hour (Pair Programming)
 
 Feb 19th, 2020
 Pair Programming:
-Spent 20 minutes refactoring code to be clean code (moving code form hpp to cpp, etc.)
-Spent 10 minutes adding cursor for selecting where to shoot
-Spent 30 minutes getting code to run on another computer, testing portability
+Spent 20 minutes refactoring code to be clean code (moving code form hpp to cpp, etc.).
+Spent 10 minutes adding cursor for selecting where to shoot.
+Spent 30 minutes getting code to run on another computer, testing portability.
 TOTAL: 1 hour (Pair Programming)
-
 Solo Programming:
 Spent 1.5 hours trying to stop the cursor from escaping the board, unsuccessfully.
-Spent 4 hours working on getting tiles (ships and empty spaces alike) to recognize when they have been shot and have "X" appear in the locations that have been shot at. Managed to get the "X"s to appear, but not in the right places.
+Spent 4 hours working on getting tiles (ships and empty spaces alike) to recognize when they have been shot and have "X"
+appear in the locations that have been shot at. Managed to get the "X"s to appear, but not in the right places.
 Total: 5.5 hours (Solo Programming)
 
 Feb 20th, 2020
-Solo Programming: Spent 20 minutes adding ability to quit the game during the shooting phase. While it wasn't specifically requested by the customer, it is undoubtedly something they would want.
+Solo Programming: Spent 20 minutes adding ability to quit the game during the shooting phase. While it wasn't
+originally requested by the customer, it is undoubtedly something they would want.
+Total: 20 minutes (Solo Programming)
+
+
