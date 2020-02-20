@@ -15,7 +15,7 @@ TEST_CASE("Grid Testing","Grid"){
     REQUIRE(grid.placeShip(bad_ship)==false);
     INFO("grid.shoot(3,0)==true");
     REQUIRE(grid.shoot(1,0)==true);
-    grid.draw(5,5);
+    grid.draw(vec2(5,5));
 
     REQUIRE(grid.isOnBoard(bad_ship)==false);
     Grid grid2;

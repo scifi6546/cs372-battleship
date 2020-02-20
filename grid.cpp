@@ -93,9 +93,9 @@ bool Ship::shoot(int x,int y){
 void Ship::draw(int x,int y){
     for(auto h:_hull){
         if(h.shot==true){
-            draw::drawchar(vec2(h.pos.x+x,h.pos.y+y),'*');
+            draw::drawchar(vec2(h.pos.x+x,h.pos.y+y),'*',NONE);
         }else{
-            draw::drawchar(vec2(h.pos.x+x,h.pos.y+y),'*');
+            draw::drawchar(vec2(h.pos.x+x,h.pos.y+y),'*',NONE);
         }
     }
 }
@@ -172,7 +172,7 @@ bool Grid::isOnBoard(Ship& to_check){
 void Grid::draw(vec2 offset){
     for(int i=0;i<_boardXSize;i++){
         for(int j=0;j<_boardYSize;j++){
-            draw::drawchar(vec2(offset.x+i,offset.y+j),'~');
+            draw::drawchar(vec2(offset.x+i,offset.y+j),'~',NONE);
         }
     }
     for(auto ship:_ships){
@@ -182,7 +182,7 @@ void Grid::draw(vec2 offset){
     if(_hoverShip!=nullptr){
         _hoverShip->draw(offset.x,offset.y);
     }
-    draw::drawchar(_cursorPos+offset,'@');
+    draw::drawchar(_cursorPos+offset,'@',NONE);
 }
 void Grid::setCursor(vec2 pos){
     _cursorPos=pos;

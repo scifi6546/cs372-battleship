@@ -11,7 +11,7 @@ void draw::init(bool DrawToScreen){
 	    noecho();
     }
 }
-int draw::drawchar(vec2 pos,char to_draw){
+int draw::drawchar(vec2 pos,char to_draw,colors draw_colors){
     if(ActuallyRunning){
         mvaddch(draw::getRows()-pos.y,pos.x,to_draw);
     }
