@@ -21,7 +21,10 @@ Pair Programming:
 Spent an hour and a half fixing manual placement of ships (screen clears with each space moved, can't move ship off the board).
 Spent a half-hour cleaning up code and making unit tests and the player grids display together correctly.
 TOTAL: 2 hours (Pair Programming)
-Thoughts: 
+Thoughts: We made significant headway on implementing manually placing ships, and then spent the last half-hour
+just cleaning up our code, which may make it seem like we didn't get much done, but it felt like what we got done was
+really important and it just took longer than expected.
+Difficulty Points / Hour: 0.5
 
 Feb 17th, 2020
 Pair Programming:
@@ -29,6 +32,8 @@ Spent 20 minutes finishing up placement of ships (can now lock into place and be
 Spent 10 minutes adding a visual representation for the grid (in the form of tildes).
 Spent a half-hour working on adding ability to shoot.
 TOTAL: 1 hour (Pair Programming)
+Thoughts: For the first half-hour we focused on small tasks where we met our time expectations, and then we made some progress on the code for shooting the opponent. All in all, it felt like a really productive hour.
+Difficulty Points / Hour: 1.2
 
 Feb 19th, 2020
 Pair Programming:
@@ -41,12 +46,15 @@ Spent 1.5 hours trying to stop the cursor from escaping the board, unsuccessfull
 Spent 4 hours working on getting tiles (ships and empty spaces alike) to recognize when they have been shot and have "X"
 appear in the locations that have been shot at. Managed to get the "X"s to appear, but not in the right places.
 Total: 5.5 hours (Solo Programming)
+Thoughts:
 
 Feb 20th, 2020
 Solo Programming: Spent 20 minutes adding ability to quit the game during the shooting phase. While it wasn't
 originally requested by the customer, it is undoubtedly something they would want.
 Spent 20 minutes fixing where the "X"s appear after you shoot. They now display in the right locations,
 except that they don't appear on ship spaces.
-Total: 20 minutes (Solo Programming)
+Spent 30 minutes trying to get "*"s to appear in spots where you've shot a ship, to no avail.
+Total: 1 hour 10 minutes (Solo Programming)
+Thoughts:
 
 
