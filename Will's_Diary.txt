@@ -32,3 +32,6 @@ Solo Programming:
 Spent 1.5 hours trying to stop the cursor from escaping the board, unsuccessfully.
 Spent 4 hours working on getting tiles (ships and empty spaces alike) to recognize when they have been shot and have "X" appear in the locations that have been shot at. Managed to get the "X"s to appear, but not in the right places.
 Total: 5.5 hours (Solo Programming)
+
+Feb 20th, 2020
+Solo Programming: Spent 20 minutes adding ability to quit the game during the shooting phase. While it wasn't specifically requested by the customer, it is undoubtedly something they would want.
