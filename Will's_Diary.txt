@@ -4,4 +4,16 @@ Spent an hour in-class on writing user stories, giving estimates for how much ti
 Feb 11th, 2020
 Spent an hour and a half getting board to work with defaulted ship placement.
 Spent an hour on being able to manually place ships.
-Spent an hour getting ships to be shot (still not finished).
+Spent an hour adding the ability to shoot (still not finished).
+TOTAL: 3.5 hours
+
+Feb 13th, 2020
+Spent an hour and a half fixing manual placement of ships (screen clears with each space moved, can't move ship off the board).
+Spent a half-hour cleaning up code and making unit tests and the player grids display together correctly
+TOTAL: 2 hours
+
+Feb 17th, 2020
+Spent 20 minutes finishing up placement of ships (can now lock into place and be placed by BOTH players)
+Spent 10 minutes adding a visual representation for the grid (in the form of tildes)
+Spent a half-hour working on adding ability to shoot
+TOTAL: 1 hour
