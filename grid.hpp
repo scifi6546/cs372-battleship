@@ -56,15 +56,7 @@ class Grid{
         void flipHoverShip();
         bool isOnBoard(Ship& to_check);
         bool isOverlapping(const Ship &to_check);
-        bool shoot(int x, int y){
-            bool output = false;
-            for(auto ship:_ships){
-                if(ship.shoot(x,y)){
-                    output = true;
-                }
-            }
-            return output;
-        }
+        bool shoot(int x, int y);
         void draw(vec2 offset);
         bool placeHover();
         void setCursor(vec2 pos);
@@ -72,9 +64,7 @@ class Grid{
         const int _boardXSize = 10;
         const int _boardYSize = 10;
         vec2 _cursorPos=vec2(0,0);
-        
         std::unique_ptr<Ship> _hoverShip;
-
         std::vector<Ship> _ships;
         
 };

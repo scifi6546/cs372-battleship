@@ -71,6 +71,7 @@ void Game::shoot(int player_num){
             char_pos.x+=1;
         }
         if(temp_char==' '){
+            player->shoot(char_pos.x,char_pos.y);
             break;
         }
         player->setCursor(char_pos);

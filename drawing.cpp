@@ -41,11 +41,13 @@ int draw::getCols(){
     if(ActuallyRunning){
         return getmaxx(stdscr);
     }
+    return 10;
 }
 int draw::getRows(){
     if(ActuallyRunning){
         return getmaxy(stdscr);
     }
+    return 10;
 }
 void draw::refresh_screen(){
     if(ActuallyRunning){

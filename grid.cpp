@@ -77,7 +77,10 @@ bool Ship::shoot(int x,int y){
     bool is_shot = false;
     for(size_t i =0; i<_hull.size();i++){
         if(_hull[i].pos.x==x && _hull[i].pos.y==y && _hull[i].shot==false){
-            _hull[i].shot=true;
+	
+            auto t_hull = _hull[i];
+            t_hull.shot=true;
+            _hull[i]=t_hull;
             is_shot = true;
         }
     }
@@ -96,8 +99,10 @@ void Ship::draw(int x,int y){
     for(auto h:_hull){
         if(h.shot==true){
             draw::drawchar(vec2(h.pos.x+x,h.pos.y+y),'#',SHIP);
+                draw::drawchar(vec2(12,12),'h',NONE);
         }else{
             draw::drawchar(vec2(h.pos.x+x,h.pos.y+y),'*',SHIP);
+                draw::drawchar(vec2(12,13),'n',NONE);
         }
     }
 }
@@ -171,6 +176,16 @@ bool Grid::isOnBoard(Ship& to_check){
     }
     return true;
 }
+bool Grid::shoot(int x, int y){
+    bool output = false;
+    for(auto ship:_ships){
+        if(ship.shoot(x,y)){
+            output = true;
+        }
+    }
+    return output;
+}
+   
 void Grid::draw(vec2 offset){
     for(int i=0;i<_boardXSize;i++){
         for(int j=0;j<_boardYSize;j++){
