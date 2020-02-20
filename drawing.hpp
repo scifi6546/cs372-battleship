@@ -1,7 +1,7 @@
 #ifndef DRAWING
 #define DRAWING
 #include "vec2.hpp"
-enum colors{NONE,BLUE};
+enum colors{NONE,OCEAN,SHIP,BOARDER,CURSOR};
 namespace draw{
     void init(bool DrawToScreen);
     int drawchar(vec2 pos,char to_draw,colors draw_colors);

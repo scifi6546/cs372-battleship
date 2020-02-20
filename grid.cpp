@@ -68,6 +68,8 @@ void Ship::flip_ship(){
         case Left:
             _rotation=Up;
             break;
+	case NUM_ROTATIONS:
+	    break;
     }
     _buildHull();
 }
