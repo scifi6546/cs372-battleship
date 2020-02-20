@@ -17,3 +17,9 @@ Spent 20 minutes finishing up placement of ships (can now lock into place and be
 Spent 10 minutes adding a visual representation for the grid (in the form of tildes)
 Spent a half-hour working on adding ability to shoot
 TOTAL: 1 hour
+
+Feb 19th, 2020
+Spent 20 minutes refactoring code to be clean code (moving code form hpp to cpp, etc.)
+Spent 10 minutes adding cursor for selecting where to shoot
+Spent 30 minutes getting code to run on another computer, testing portability
+TOTAL: 1 hour
