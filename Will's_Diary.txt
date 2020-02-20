@@ -45,6 +45,8 @@ Total: 5.5 hours (Solo Programming)
 Feb 20th, 2020
 Solo Programming: Spent 20 minutes adding ability to quit the game during the shooting phase. While it wasn't
 originally requested by the customer, it is undoubtedly something they would want.
+Spent 20 minutes fixing where the "X"s appear after you shoot. They now display in the right locations,
+except that they don't appear on ship spaces.
 Total: 20 minutes (Solo Programming)
 
 
