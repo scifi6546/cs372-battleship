@@ -73,8 +73,10 @@ void Game::shoot(int player_num){
         if(temp_char==' '){
             break;
         }
-        player->setCursor(char_pos+offset);
+        player->setCursor(char_pos);
         draw();
         draw::refresh_screen();
     }
+    player->shoot(char_pos.x,char_pos.y);
+    draw::refresh_screen();
 }

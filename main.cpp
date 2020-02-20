@@ -6,6 +6,11 @@ int main(){
 	game.draw();
 	game.placeShip(1,Ship(Up,0,3,5,"air craft carrier"));
 	game.placeShip(2,Ship(Up,0,3,5,"air craft carrier"));
-	game.shoot(0);
+	game.shoot(1);
+	game.shoot(2);
+		game.shoot(1);
+	game.shoot(2);
+		game.shoot(1);
+	game.shoot(2);
 	
 }

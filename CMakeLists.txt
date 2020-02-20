@@ -1,11 +1,9 @@
-cmake_minimum_required(VERSION 3.13)
+cmake_minimum_required(VERSION 3.10)
 
 if(UNIX AND NOT APPLE)
     set(LINUX TRUE)
 endif()
-if(LINUX)
-    set(CMAKE_CXX_COMPILER "/usr/bin/g++-9")
-endif()
+
 project(battleship)
 add_executable(battleship main.cpp grid.cpp drawing.cpp UI.cpp)
 find_library(NCURSES NAMES ncurses)

@@ -182,7 +182,7 @@ void Grid::draw(vec2 offset){
     if(_hoverShip!=nullptr){
         _hoverShip->draw(offset.x,offset.y);
     }
-    draw::drawchar(_cursorPos,'@');
+    draw::drawchar(_cursorPos+offset,'@');
 }
 void Grid::setCursor(vec2 pos){
     _cursorPos=pos;
