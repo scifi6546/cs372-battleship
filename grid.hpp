@@ -18,6 +18,24 @@ struct ShipHull{
     vec2 pos=vec2(0,0);
 
 };
+struct SHIP_STATUS{
+    int hits=0;
+    bool sunk=false;
+
+};
+
+struct HIT{
+	vec2 pos=vec2(0,0);
+
+	bool operator==(HIT& other){
+
+		return pos==other.pos;
+	}
+	bool operator<(HIT&other){
+            return pos<other.pos;
+
+	}
+};
 class Ship{
     Ship() = delete;
     public:
@@ -31,9 +49,9 @@ class Ship{
         int length()const{return _length;};
         Rotation getRot()const{return _rotation;};
         //shoots hull elements
-        bool shoot(int x,int y, std::vector<std::vector<bool>> & beenShot);
+        SHIP_STATUS shoot(std::vector<HIT> shots)const;
         //draws elements with offset x and y
-        void draw(int x,int y, std::vector<std::vector<bool>> & beenShot);
+        void draw(int x,int y, std::vector<HIT> & beenShot);
         //flips ships clockwise
         void flip_ship();
         std::vector<ShipHull> _hull;
@@ -57,8 +75,8 @@ class Grid{
         void flipHoverShip();
         bool isOnBoard(Ship& to_check);
         bool isOverlapping(const Ship &to_check);
-        bool shoot(int x, int y, std::vector<std::vector<bool>> & beenShot);
-        void draw(vec2 offset, std::vector<std::vector<bool>> & beenShot);
+        bool shoot(vec2 pos);
+        void draw(vec2 offset);
         bool placeHover();
         void setCursor(vec2 pos);
    private:
@@ -68,5 +86,6 @@ class Grid{
         std::unique_ptr<Ship> _hoverShip;
         std::vector<Ship> _ships;
         
+	std::vector<HIT> _hits;
 };
 #endif

@@ -23,6 +23,13 @@ void draw::init(bool DrawToScreen){
 
     }
 }
+void draw::debug(std::string log){
+    for(int i=0;i<log.size();i++){
+        draw::drawchar(vec2(1+i,30),log[i],NONE);
+    }
+	
+
+}
 int draw::drawchar(vec2 pos,char to_draw,colors draw_colors){
     if(ActuallyRunning){
         attron(COLOR_PAIR(draw_colors));

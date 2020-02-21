@@ -1,6 +1,7 @@
 #include "grid.hpp"
 #include "drawing.hpp"
 #include<iostream>
+#include <algorithm>
 #include<vector>
 using std::vector;
 
@@ -77,40 +78,37 @@ void Ship::flip_ship(){
     }
     _buildHull();
 }
-bool Ship::shoot(int x,int y, vector<vector<bool>> & beenShot){
-    bool is_shot = false;
-    for(size_t i =0; i<_hull.size();i++){
+SHIP_STATUS Ship::shoot(std::vector<HIT> shots)const{
+    //getting if unique
+    std::sort(shots.begin(),shots.end());
+    std::unique(shots.begin(),shots.end());
+    SHIP_STATUS out;
+    for(auto shot:shots){
+        for(auto hull:_hull){
+            if(hull.pos==shot.pos){
+		    out.hits++;
 
-        beenShot[x][y] = true;
-        if(_hull[i].pos.x==x && _hull[i].pos.y==y && _hull[i].shot==false){
-	
-            auto t_hull = _hull[i];
-            t_hull.shot=true;
-            _hull[i]=t_hull;
-            is_shot = true;
+            }
         }
+
     }
-    int num_shot = 0;
-    for (auto h:_hull){
-        if(h.shot==true){
-            num_shot++;
-        }
+    if(out.hits==_length){
+        out.sunk=true;
     }
-    if(num_shot==_length){
-        sunk = true;
-    }
-    
-    return is_shot;
+    return out;
+
 }
-void Ship::draw(int x,int y, vector<vector<bool>> & beenShot){
+void Ship::draw(int x,int y, vector<HIT>&beenShot){
     for(auto h:_hull){
-        if(h.shot){
+        for(auto hit:beenShot){
+        if(h.pos==hit.pos){
             draw::drawchar(vec2(h.pos.x+x,h.pos.y+y),'*',SHIP);
                 draw::drawchar(vec2(12,12),'h',NONE);
         }else{
             draw::drawchar(vec2(h.pos.x+x,h.pos.y+y),'#',SHIP);
                 draw::drawchar(vec2(12,13),'n',NONE);
         }
+	}
     }
 }
 bool Grid::placeShip(Ship to_place){
@@ -128,7 +126,8 @@ void Grid::addHoverShip(Ship to_place){
 bool Grid::placeHover(){
     if(_hoverShip!=nullptr){
         bool status = placeShip(*_hoverShip);
-        _hoverShip=nullptr;
+	if(status==true)
+            _hoverShip=nullptr;
         return status;
     }
     return false;
@@ -183,31 +182,35 @@ bool Grid::isOnBoard(Ship& to_check){
     }
     return true;
 }
-bool Grid::shoot(int x, int y, vector<vector<bool>> & beenShot){
+bool Grid::shoot(vec2 pos){
+    HIT hit;
+    hit.pos=pos;
+    _hits.push_back(hit);
     bool output = false;
     for(auto ship:_ships){
-        if(ship.shoot(x,y,beenShot)){
-            output = true;
+        if(ship.shoot(_hits).sunk){
         }
+	for(auto hit:_hits){
+	    if(ship.shoot({hit}).hits==1)
+		    output=true;
+
+	}
     }
     return output;
 }
 
-void Grid::draw(vec2 offset, vector<vector<bool>> & beenShot){
+void Grid::draw(vec2 offset){
     for(int i=0;i<_boardXSize;i++){
         for(int j=0;j<_boardYSize;j++){
-            if(beenShot[i][j])  
-                draw::drawchar(vec2(offset.x+i,offset.y+j),'X',OCEAN);
-            else
-                draw::drawchar(vec2(offset.x+i,offset.y+j),'~',OCEAN);
+            draw::drawchar(vec2(offset.x+i,offset.y+j),'~',OCEAN);
         }
     }
     for(auto ship:_ships){
-        ship.draw(offset.x,offset.y, beenShot);
-        draw::refresh_screen();
+        ship.draw(offset.x,offset.y,_hits);
     }
     if(_hoverShip!=nullptr){
-        _hoverShip->draw(offset.x,offset.y, beenShot);
+	draw::debug("drawing hover ship");
+        _hoverShip->draw(offset.x,offset.y,_hits);
     }
     draw::drawchar(_cursorPos+offset,'@',CURSOR);
 }

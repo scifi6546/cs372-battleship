@@ -5,7 +5,7 @@ if(UNIX AND NOT APPLE)
 endif()
 
 project(battleship)
-add_executable(battleship main.cpp grid.cpp drawing.cpp UI.cpp)
+add_executable(battleship test.cpp grid.cpp drawing.cpp UI.cpp)
 find_library(NCURSES NAMES ncurses)
 target_link_libraries(${PROJECT_NAME}
 	${NCURSES})

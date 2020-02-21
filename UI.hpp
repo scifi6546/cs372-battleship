@@ -10,9 +10,9 @@ class Game{
         player1.placeShip(Ship(Right,1,1,4,"battleship"));
         player2.placeShip(Ship(Up,1,1,4,"battleship"));
     }
-        void placeShip(int playerNum, Ship to_place, std::vector<std::vector<bool>> & beenShot);
-        void draw(std::vector<std::vector<bool>> & beenShot);
-        void shoot(int player_num, std::vector<std::vector<bool>> & beenShot, bool & quit);
+        void placeShip(int playerNum, Ship to_place);
+        void draw();
+        void shoot(int player_num);
     private:
         Grid player1;
         Grid player2;
