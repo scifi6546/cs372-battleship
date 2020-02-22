@@ -60,10 +60,10 @@ class Ship{
         //rebuild hull
         void _buildHull();
         Rotation _rotation;
-        int _Xpos;
-        int _Ypos;
-        int _length;
-        bool sunk;
+        int _Xpos=0;
+        int _Ypos=0;
+        int _length=0;
+        bool sunk=false;
         
 
 };
@@ -83,9 +83,9 @@ class Grid{
         const int _boardXSize = 10;
         const int _boardYSize = 10;
         vec2 _cursorPos=vec2(0,0);
-        std::unique_ptr<Ship> _hoverShip;
-        std::vector<Ship> _ships;
+        std::unique_ptr<Ship> _hoverShip=nullptr;
+        std::vector<Ship> _ships={};
         
-	std::vector<HIT> _hits;
+	std::vector<HIT> _hits={};
 };
 #endif

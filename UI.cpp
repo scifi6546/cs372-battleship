@@ -44,6 +44,7 @@ void Game::placeShip(int playerNum, Ship to_place){
     player->placeHover();
 }
 void Game::draw(){
+    draw::clear_screen();
     player1.draw(vec2(1,1));
     player2.draw(vec2(20,1));
     draw::refresh_screen();

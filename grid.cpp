@@ -108,7 +108,7 @@ void Ship::draw(int x,int y, vector<HIT>&beenShot){
             draw::drawchar(vec2(h.pos.x+x,h.pos.y+y),'#',SHIP);
                 draw::drawchar(vec2(12,13),'n',NONE);
         }
-	}
+}
     }
 }
 bool Grid::placeShip(Ship to_place){
@@ -210,7 +210,8 @@ void Grid::draw(vec2 offset){
     }
     if(_hoverShip!=nullptr){
 	draw::debug("drawing hover ship");
-        _hoverShip->draw(offset.x,offset.y,_hits);
+	auto v = std::vector<HIT>();
+        _hoverShip->draw(offset.x,offset.y,v);
     }
     draw::drawchar(_cursorPos+offset,'@',CURSOR);
 }
